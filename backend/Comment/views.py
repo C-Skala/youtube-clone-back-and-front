@@ -12,10 +12,13 @@ from rest_framework.decorators import api_view, permission_classes
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def all_comments(request):
-    comment = Comment.objects.all()
-    serializer = CommentSerializer(comment, many=True)
-    return Response(serializer.data)
-    
+       comments = request.query_params.get('video_id_comments')
+       queryset = Comment.objects.all()
+       if comments:
+        queryset = queryset.filter(video_id = comments)
+
+        serializer = CommentSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

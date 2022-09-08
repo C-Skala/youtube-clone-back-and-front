@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d4409d57-7119-4339-bfae-1f3a18bc6341",
+		"_postman_id": "56a7f1c6-9e5a-401d-ad60-73a7c88b9ea4",
 		"name": "DRF_JWT_Backend",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21935939"
 	},
 	"item": [
 		{
@@ -49,7 +50,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"dantheman\",\r\n    \"password\": \"password1@\"\r\n}",
+							"raw": "{\r\n    \"username\": \"dantheman2\",\r\n    \"password\": \"password1@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,6 +217,85 @@
 							"path": [
 								"api",
 								"cars",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "get all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comment/all/?video_id_comments=NreJ_VEcuYE",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comment",
+								"all",
+								""
+							],
+							"query": [
+								{
+									"key": "video_id_comments",
+									"value": "NreJ_VEcuYE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post new comment (protected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYzNDYyODcxLCJpYXQiOjE2NjI1OTg4NzEsImp0aSI6ImE0MWYzMTI0MDE0ZDQ4YWY4ZjUxZjk0YTVlNDMwZmEyIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJDc2thbGEiLCJmaXJzdF9uYW1lIjoiIn0.7Hn1s56i6f9hpwdXvxf5XfMWzrQj_2QVUjZSoDeo_iI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"video_id\":\"NreJ_VEcuYE\",\r\n    \"text\": \"POKEMON!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/comment/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"comment",
 								""
 							]
 						}
