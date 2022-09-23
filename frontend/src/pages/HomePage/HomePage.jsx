@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Youtube_API_Key from "../../YT_AP_K.js"
 
 import axios from "axios";
 
@@ -9,26 +10,26 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setCars(response.data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-    fetchCars();
-  }, [token]);
+
+  //useEffect(() => {
+    //   const fetchCars = async () => {
+  //     try {
+  //       let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+  //         headers: {
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       });
+  //       setCars(response.data);
+  //     } catch (error) {
+  //       console.log(error.response.data);
+  //     }
+  //   };
+  //   fetchCars();
+  // }, [token]);
   return (
     <div>
-      <div className="container">
+      {/* <div className="container">
       <h1>Home Page for {user.username}!</h1>
       {cars &&
         cars.map((car) => (
@@ -36,10 +37,10 @@ const HomePage = () => {
             {car.year} {car.model} {car.make}
           </p>
         ))}
-      </div>
+      </div> */}
       <iframe id="ytplayer" type="text/html" width="640" height="360"
       src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-      frameborder="0"></iframe>
+      frameBorder="0"></iframe>
     </div>
     
     
