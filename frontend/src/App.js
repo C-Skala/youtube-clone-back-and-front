@@ -24,10 +24,14 @@ function App() {
 
 
   async function fetchVideos(){
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filterVideo}&key=${Youtube_API_Key}&part=snippet&type=video&maxResults=5`);
-    setFilterVideo(response.data.results)
-    console.log(response)
+    const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${filterVideo}&key=${Youtube_API_Key}&part=snippet&type=video&maxResults=5`);
+        console.log(response.data.items)
+        setVideos(response.data.items)
+        console.log({videos})
+    
   }
+
+  
  
 
   useEffect(() => {
@@ -35,11 +39,12 @@ function App() {
     let mounted = true;
     if(mounted){
       fetchVideos();
+      
     }
     return () => mounted = false;
   }, [])
   
-  
+
   
   
   
@@ -55,13 +60,13 @@ function App() {
           path="/"
           element={
             // <PrivateRoute>
-              <HomePage />
+                <HomePage parentVideo = {videos} setVideo = {fetchVideos}/>
             // </PrivateRoute>
           }
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/videoPage" element={<VideoPage />} />
+        <Route path="/videoPage" element={<VideoPage />} parentVideo = {videos} setVideo = {fetchVideos}/>
       </Routes>
       <Footer />
     </div>

@@ -1,15 +1,15 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import Youtube_API_Key from "../../YT_AP_K.js"
+//import { useEffect, useState } from "react";
+//import useAuth from "../../hooks/useAuth";
+//import Youtube_API_Key from "../../YT_AP_K.js"
 
-import axios from "axios";
+//import axios from "axios";
 
-const HomePage = () => {
+const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
-  const [user, token] = useAuth();
+  //const [user, token] = useAuth();
 
 
   //useEffect(() => {
@@ -27,23 +27,24 @@ const HomePage = () => {
   //   };
   //   fetchCars();
   // }, [token]);
+  
+
   return (
     <div>
-      {/* <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))}
-      </div> */}
-      <iframe id="ytplayer" type="text/html" width="640" height="360"
-      src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-      frameBorder="0"></iframe>
+       {props.parentVideo.map((videos)=> {
+          return(
+             <tr key = {videos.etag}>
+              <td>{videos.snippet.title}</td>
+              <td><img src = {videos.snippet.thumbnails.high.url}/></td>
+              {/* <td>{videos.id.videoId}</td>
+              <iframe id="ytplayer" type="text/html" width="640" height="360"
+              src={`https://www.youtube.com/embed/${videos.id.videoId}?autoplay=1&origin=http://example.com`}
+              frameBorder="0"></iframe>                       */}
+             </tr>
+           )
+        })}
+      
     </div>
-    
-    
   );
 };
 
