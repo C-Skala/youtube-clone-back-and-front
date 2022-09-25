@@ -1,5 +1,7 @@
 import React from "react";
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import SearchBar from "../../components/Searchbar/Searchbar";
+import { useNavigate, Link } from "react-router-dom";
 //import useAuth from "../../hooks/useAuth";
 //import Youtube_API_Key from "../../YT_AP_K.js"
 
@@ -27,15 +29,35 @@ const HomePage = (props) => {
   //   };
   //   fetchCars();
   // }, [token]);
+  const [searchTerm, setSearchTerm] = useState('')
+  const navigate = useNavigate();
+
+  function videoSearch(event){
+    event.preventDefault();
+    let response = props.setVideo((searchVideo) =>{
+      if (props.searchVideo.includes(searchTerm)){
+            return true;
+          }
+          else {
+            return false;
+          }
+        });
+        props.setVideos(response)
+    }
   
 
   return (
-    <div>
+    
+     <div> 
+      <form onSubmit = {videoSearch}>
+      <input placeholder = 'search' type = 'text' value = {searchTerm} onChange = {(event) => setSearchTerm(event.target.value)}/>
+      <button type = 'submit'>search</button>
+      </form>
        {props.parentVideo.map((videos)=> {
           return(
              <tr key = {videos.etag}>
               <td>{videos.snippet.title}</td>
-              <td><img src = {videos.snippet.thumbnails.high.url}/></td>
+              <td><button onClick={() => navigate("/videoPage")}><img src = {videos.snippet.thumbnails.high.url}/></button></td>
               {/* <td>{videos.id.videoId}</td>
               <iframe id="ytplayer" type="text/html" width="640" height="360"
               src={`https://www.youtube.com/embed/${videos.id.videoId}?autoplay=1&origin=http://example.com`}

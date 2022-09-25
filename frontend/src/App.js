@@ -60,7 +60,7 @@ function App() {
           path="/"
           element={
             // <PrivateRoute>
-                <HomePage parentVideo = {videos} setVideo = {fetchVideos}/>
+                <HomePage parentVideo = {videos} setVideo = {fetchVideos} searchVideo = {filterVideo}/>
             // </PrivateRoute>
           }
         />
